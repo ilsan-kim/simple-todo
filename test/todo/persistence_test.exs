@@ -9,5 +9,12 @@ defmodule PersistnceTest do
   test "open file" do
     assert open_file()
   end
-end
 
+  test "save" do
+    save("asdasd") 
+  end
+
+  test "get" do
+    IO.puts get(4)
+  end
+end
