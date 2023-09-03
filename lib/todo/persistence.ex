@@ -17,18 +17,18 @@ defmodule Todo.Persistence do
     end
   end
 
-  def save(data) do
-    open_file(file_path())
+  def save(data, path \\ file_path()) do
+    open_file(path)
     |> write(data)
-    |> save_file(file_path())
+    |> save_file(path)
   end 
 
   def delete(data) do
     
   end
 
-  def get(index) do
-    open_file(file_path())
+  def get(index, path \\ file_path()) do
+    open_file(path)
     |> get_line(index)
   end
 
