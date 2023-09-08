@@ -23,8 +23,10 @@ defmodule Todo.Persistence do
     |> save_file(path)
   end 
 
-  def delete(data) do
-    
+  def delete(index, path \\ file_path()) do
+    open_file(path)
+    |> remove_character(index)
+    |> save_file(path)
   end
 
   def get(index, path \\ file_path()) do
@@ -73,5 +75,33 @@ defmodule Todo.Persistence do
     String.split(data, "\n")
     |> Enum.at(index - 1)
   end
-end
 
+  defp remove_character(data, index) do
+    t = "[#{index}]"
+
+    String.split(data, "\n")
+    |> delete(t, [])
+  end
+  
+  # 첫 루프
+  defp delete([head | tail], t, []) do
+    case String.starts_with?(head, t) do
+      # 첫번째 루프 떄 target 찾으면 head 버리기
+      true -> delete(tail, t, Enum.drop(tail, 1))
+      # 첫번쨰 루프 때 target 못 찾으면 
+      false -> delete(tail, t, [head])
+    end  
+  end
+  # 마지막 루프
+  defp delete([], _, res), do: Enum.join(res, "\n")
+   
+  # 중간 루프
+  defp delete([head | tail], t, res) do
+    case String.starts_with?(head, t) do
+      # 중간 루프 때 target 찾으면 /// haed 버리고... 
+      true -> delete(tail, t, res)
+      # 중간 루프 때 target 못 찾으면 /// head 를 res 뒤에 붙인다
+      false -> delete(tail, t, res++[head])
+    end
+  end
+end

@@ -10,19 +10,27 @@ defmodule PersistnceTest do
     assert Todo.Persistence.file_path() == "./data"
   end
 
-  #test "open file" do
-  #  assert open_file()
-  #end
-
-  test "save" do
+  test "save and get" do
     res = save("test todo data", "./test_data")
     file = open_file("./test_data")
     assert res == file
-  end
-
-  test "get" do
+    
     res = get(1, "./test_data")
     |> String.contains?("test todo data")
     assert res == true
+
+    #res = delete(1, "./test_data")
+    #assert res == ""
+
+    # TODO 이거 테스트 잘 짜기... 중간에 삭제 잘 되게 ....
+    save("tdd", "./test_data")
+    save("tdd", "./test_data")
+    save("tdd", "./test_data")
+    save("tdd", "./test_data")
+    save("tdd", "./test_data")
+    save("tdd", "./test_data")
+
+    res = delete(3, "./test_data")
+    IO.puts res
   end
 end
