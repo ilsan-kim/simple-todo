@@ -27,10 +27,11 @@ defmodule PersistnceTest do
     save("tdd", "./test_data")
     save("tdd", "./test_data")
     save("tdd", "./test_data")
+    res = delete(3, "./test_data")
     save("tdd", "./test_data")
     save("tdd", "./test_data")
 
-    res = delete(3, "./test_data")
+    res = delete(5, "./test_data")
     IO.puts res
   end
 end

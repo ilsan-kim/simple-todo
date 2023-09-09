@@ -58,11 +58,16 @@ defmodule Todo.Persistence do
   end
   
   defp get_index_of_data(data) do
+    pattern = ~r/\[(\d+)\]/
     case data do
       "" -> 0
       _ -> 
-        String.split(data, "\n")
-        |> Enum.count
+        last = String.split(data, "\n")
+        |> Enum.at(-1)
+        
+        matches = Regex.scan(pattern, last)
+        [_, c] = hd(matches)
+        String.to_integer(c)
     end
   end
 
