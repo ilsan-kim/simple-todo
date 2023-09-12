@@ -1,12 +1,7 @@
 defmodule Todo.Persistence do
   require Timex 
   
-  @file_path Application.compile_env(:todo, :file_path, "./data")
-  def file_path() do
-    @file_path
-  end
-
-  def open_file(path \\ file_path()) do
+  def open_file(path) do
     case File.read(path) do
       {:ok, data} -> 
         data
@@ -17,25 +12,25 @@ defmodule Todo.Persistence do
     end
   end
 
-  def save(data, path \\ file_path()) do
+  def save(data, path) do
     open_file(path)
     |> write(data)
     |> save_file(path)
   end 
 
-  def delete(index, path \\ file_path()) do
+  def delete(index, path) do
     open_file(path)
     |> remove_character(index)
     |> save_file(path)
   end
 
-  def get(index, path \\ file_path()) do
+  def get(index, path) do
     open_file(path)
     |> get_line(index)
   end
 
-  def get_all() do
-    open_file(file_path())
+  def get_all(path) do
+    open_file(path)
   end
 
 
