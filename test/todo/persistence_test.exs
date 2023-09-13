@@ -17,17 +17,5 @@ defmodule PersistnceTest do
 
     res = delete(1, "./test_data")
     assert res == ""
-
-    # TODO 이거 테스트 잘 짜기... 중간에 삭제 잘 되게 ....
-    save("tdd", "./test_data")
-    save("tdd", "./test_data")
-    save("tdd", "./test_data")
-    save("tdd", "./test_data")
-    res = delete(3, "./test_data")
-    save("tdd", "./test_data")
-    save("tdd", "./test_data")
-
-    res = delete(5, "./test_data")
-    IO.puts res
   end
 end
