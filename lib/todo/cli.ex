@@ -1,12 +1,10 @@
 defmodule Todo.Cli do
-  alias Mix.Task
-
   @file_path Application.compile_env(:todo, :file_path, "./data")
   def file_path() do
     @file_path
   end
   
-  def run(argv) do
+  def main(argv) do
     parse_args(argv)
   end
 
@@ -22,6 +20,7 @@ defmodule Todo.Cli do
 
   def args_to_internal_data([get: _], file_path) do
     Todo.Persistence.get_all(file_path)
+    |> IO.puts 
   end
 
   def args_to_internal_data([delete: index], file_path) do

@@ -1,6 +1,4 @@
 defmodule Todo.Persistence do
-  require Timex 
-  
   def open_file(path) do
     case File.read(path) do
       {:ok, data} -> 
@@ -67,8 +65,8 @@ defmodule Todo.Persistence do
   end
 
   defp get_current_time() do
-    Timex.now()
-    |> Timex.format!("%FT%T%:z", :strftime)
+    DateTime.utc_now()
+    |> DateTime.to_string()
   end
 
   defp get_line(data, index) do
